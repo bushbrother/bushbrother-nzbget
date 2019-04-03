@@ -1,9 +1,6 @@
 # Buildstage
 FROM lsiobase/alpine:3.9 as buildstage
 
-# set NZBGET version
-ARG NZBGET_RELEASE
-
 RUN \
  echo "**** install build packages ****" && \
  apk add \
@@ -39,9 +36,6 @@ RUN \
 FROM lsiobase/alpine:3.9
 
 # set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Bushbrother version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Bushbrother"
 
 RUN \
