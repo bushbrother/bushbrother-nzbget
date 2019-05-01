@@ -5,7 +5,8 @@ RUN \
  echo "**** install build packages ****" && \
  apk add \
 	git \
-	curl && \
+	curl \
+	automake && \
  echo "**** build nzbget ****" && \
  mkdir -p /app/nzbget && \
  cd /app/nzbget && \
@@ -31,6 +32,15 @@ RUN \
  curl -o \
 	/app/nzbget/cacert.pem -L \
 	"https://curl.haxx.se/ca/cacert.pem"
+# Build par2
+echo "**** make and install par2cmdline ****"
+git clone https://github.com/Parchive/par2cmdline.git
+cd par2cmdline
+./automake.sh
+./configure
+make
+make check
+make install
 
 # Runtime Stage
 FROM lsiobase/alpine:3.9
@@ -49,19 +59,7 @@ RUN \
 	unrar \
 	ffmpeg \
 	git \
-	wget \
-	automake \
-	openmp
-
-# Build par2
-echo "**** make and install par2cmdline ****"
-git clone https://github.com/Parchive/par2cmdline.git
-cd par2cmdline
-./automake.sh
-./configure
-make
-make check
-make install
+	wget
 
 # add local files and files from buildstage
 COPY --from=buildstage /app/nzbget /app/nzbget
