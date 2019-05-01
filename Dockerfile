@@ -7,6 +7,7 @@ RUN \
 	git \
 	curl \
 	automake \
+	autoconf \
 	libtool \
 	intltool && \
  echo "**** build nzbget ****" && \
