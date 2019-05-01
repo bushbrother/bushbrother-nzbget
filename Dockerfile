@@ -40,7 +40,7 @@ echo "**** make and install par2cmdline ****" && \
 git clone https://github.com/Parchive/par2cmdline.git && \
 cd par2cmdline && \
 ./automake.sh && \
-./configure && \
+./configure --disable-dependency-tracking && \
 make && \
 make check && \
 make install
