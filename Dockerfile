@@ -54,7 +54,9 @@ RUN \
 	openmp
 
 # Build par2
+echo "**** make and install par2cmdline ****"
 git clone https://github.com/Parchive/par2cmdline.git
+cd par2cmdline
 ./automake.sh
 ./configure
 make
