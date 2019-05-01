@@ -8,6 +8,7 @@ RUN \
 	curl \
 	automake \
 	autoconf \
+	gcc \
 	libtool \
 	intltool && \
  echo "**** build nzbget ****" && \
