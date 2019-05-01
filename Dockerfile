@@ -49,7 +49,17 @@ RUN \
 	unrar \
 	ffmpeg \
 	git \
-	wget
+	wget \
+	automake \
+	openmp
+
+# Build par2
+git clone https://github.com/Parchive/par2cmdline.git
+./automake.sh
+./configure
+make
+make check
+make install
 
 # add local files and files from buildstage
 COPY --from=buildstage /app/nzbget /app/nzbget
