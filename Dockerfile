@@ -31,15 +31,14 @@ RUN \
  touch /app/nzbget/pubkey.pem && \
  curl -o \
 	/app/nzbget/cacert.pem -L \
-	"https://curl.haxx.se/ca/cacert.pem"
-# Build par2
-echo "**** make and install par2cmdline ****"
-git clone https://github.com/Parchive/par2cmdline.git
-cd par2cmdline
-./automake.sh
-./configure
-make
-make check
+	"https://curl.haxx.se/ca/cacert.pem" && \
+echo "**** make and install par2cmdline ****" && \
+git clone https://github.com/Parchive/par2cmdline.git && \
+cd par2cmdline && \
+./automake.sh && \
+./configure && \
+make && \
+make check && \
 make install
 
 # Runtime Stage
