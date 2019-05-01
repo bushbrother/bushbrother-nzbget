@@ -7,6 +7,7 @@ RUN \
 	git \
 	curl \
 	automake \
+	make \
 	autoconf \
 	g++ \
 	libtool \
