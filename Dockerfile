@@ -31,7 +31,9 @@ RUN \
  touch /app/nzbget/pubkey.pem && \
  curl -o \
 	/app/nzbget/cacert.pem -L \
-	"https://curl.haxx.se/ca/cacert.pem" && \
+	"https://curl.haxx.se/ca/cacert.pem"
+
+RUN \
 echo "**** make and install par2cmdline ****" && \
 git clone https://github.com/Parchive/par2cmdline.git && \
 cd par2cmdline && \
