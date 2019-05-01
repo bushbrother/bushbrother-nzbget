@@ -6,7 +6,9 @@ RUN \
  apk add \
 	git \
 	curl \
-	automake && \
+	automake \
+	libtool \
+	intltool && \
  echo "**** build nzbget ****" && \
  mkdir -p /app/nzbget && \
  cd /app/nzbget && \
@@ -31,9 +33,7 @@ RUN \
  touch /app/nzbget/pubkey.pem && \
  curl -o \
 	/app/nzbget/cacert.pem -L \
-	"https://curl.haxx.se/ca/cacert.pem"
-
-RUN \
+	"https://curl.haxx.se/ca/cacert.pem" && \
 echo "**** make and install par2cmdline ****" && \
 git clone https://github.com/Parchive/par2cmdline.git && \
 cd par2cmdline && \
