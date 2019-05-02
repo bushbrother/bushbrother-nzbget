@@ -89,7 +89,7 @@ RUN \
 	libgomp \
 	openssl \
 	p7zip \
-	python2 \
+	python3 \
 	unrar \
 	ffmpeg \
 	git \
