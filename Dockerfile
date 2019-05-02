@@ -60,11 +60,7 @@ RUN \
  ./configure --disable-dependency-tracking && \
  make && \
  make check && \
- make install && \
- echo "**********************" && \
- echo "**** Symlink par2 ****" && \
- echo "**********************" && \
- #ln -s /usr/local/bin/par2 /app/nzbget/par2
+ make install
 
 # Runtime stage
 FROM lsiobase/alpine:3.9
