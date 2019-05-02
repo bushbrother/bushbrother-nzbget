@@ -38,6 +38,7 @@ RUN \
  curl -o \
 	/app/nzbget/cacert.pem -L \
 	"https://curl.haxx.se/ca/cacert.pem" && \
+cd .. && \
 echo "**** make and install par2cmdline ****" && \
 git clone https://github.com/Parchive/par2cmdline.git && \
 cd par2cmdline && \
@@ -53,22 +54,28 @@ FROM lsiobase/alpine:3.9
 # set version label
 LABEL maintainer="Bushbrother"
 
+# add local files and files from buildstage
+COPY --from=buildstage /app/nzbget /app/nzbget
+COPY --from=buildstage /app/par2cmdline/par2 /usr/local/bin
+COPY --from=buildstage /app/par2cmdline/man/par2.1 /usr/local/share/man/man1
+COPY root/ /
+
 RUN \
  echo "**** install packages ****" && \
  apk add --no-cache \
 	curl \
 	libxml2 \
+	libgomp \
 	openssl \
 	p7zip \
 	python2 \
 	unrar \
 	ffmpeg \
 	git \
-	wget
-
-# add local files and files from buildstage
-COPY --from=buildstage /app/nzbget /app/nzbget
-COPY root/ /
+	wget && \
+ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
+ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
+ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair \
 
 # ports and volumes
 VOLUME /config /downloads
