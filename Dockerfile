@@ -94,12 +94,13 @@ RUN \
 	ffmpeg \
 	git \
 	wget && \
- echo "**********************" && \
- echo "**** Symlink par2 ****" && \
- echo "**********************" && \
+ echo "***********************" && \
+ echo "**** Symlink files ****" && \
+ echo "***********************" && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
- ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair
+ ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair && \
+ ln -sf /usr/bin/python3 /usr/bin/python
 
 # Ports and volumes
 VOLUME /config /downloads
