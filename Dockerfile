@@ -72,10 +72,7 @@ RUN \
 	unrar \
 	ffmpeg \
 	git \
-	wget && \
-ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
-ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
-ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair \
+	wget \
 
 # ports and volumes
 VOLUME /config /downloads
