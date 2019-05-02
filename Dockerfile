@@ -72,7 +72,7 @@ RUN \
 	unrar \
 	ffmpeg \
 	git \
-	wget \
+	wget
 
 # ports and volumes
 VOLUME /config /downloads
