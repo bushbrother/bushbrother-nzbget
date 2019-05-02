@@ -94,6 +94,9 @@ RUN \
 	ffmpeg \
 	git \
 	wget && \
+ echo "**********************" && \
+ echo "**** Symlink par2 ****" && \
+ echo "**********************" && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair
