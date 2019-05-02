@@ -10,6 +10,7 @@ RUN \
 	make \
 	autoconf \
 	g++ \
+	libgomp \
 	libtool \
 	intltool && \
  echo "**** build nzbget ****" && \
