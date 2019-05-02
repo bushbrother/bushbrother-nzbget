@@ -60,7 +60,7 @@ RUN \
  ./configure --disable-dependency-tracking && \
  make && \
  make check && \
- make install
+ make install && \
  echo "**********************" && \
  echo "**** Symlink par2 ****" && \
  echo "**********************" && \
