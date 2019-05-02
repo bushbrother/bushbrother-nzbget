@@ -2,7 +2,9 @@
 FROM lsiobase/alpine:3.9 as buildstage
 
 RUN \
- echo "**** install build packages ****" && \
+ echo "********************************" && \
+ echo "**** Install Build Packages ****" && \
+ echo "********************************" && \
  apk add \
 	git \
 	curl \
@@ -10,14 +12,18 @@ RUN \
 	make \
 	autoconf \
 	g++ \
-	libgomp \
 	libtool \
 	intltool && \
- echo "**** build nzbget ****" && \
+ echo "************************" && \
+ echo "**** Install NZBGet ****" && \
+ echo "************************" && \
  mkdir -p /app/nzbget && \
  cd /app/nzbget && \
  wget https://nzbget.net/download/nzbget-latest-bin-linux.run && \
  sh nzbget-latest-bin-linux.run --destdir /app/nzbget && \
+ echo "********************************" && \
+ echo "**** Initialise nzbget.conf ****" && \
+ echo "********************************" && \
  sed -i \
         -e "s#^MainDir=.*#MainDir=/downloads#g" \
         -e "s#^ScriptDir=.*#ScriptDir=$\{MainDir\}/scripts#g" \
@@ -33,33 +39,46 @@ RUN \
         -e "s#^AuthorizedIP=.*#AuthorizedIP=127.0.0.1#g" \
  /app/nzbget/nzbget.conf && \
  cp /app/nzbget/nzbget.conf /app/nzbget/webui/nzbget.conf.template && \
+ echo "*********************" && \
+ echo "**** Symlink git ****" && \
+ echo "*********************" && \
  ln -s /usr/bin/git /app/nzbget/git && \
+ echo "********************" && \
+ echo "**** Init Certs ****" && \
+ echo "********************" && \
  touch /app/nzbget/pubkey.pem && \
  curl -o \
 	/app/nzbget/cacert.pem -L \
 	"https://curl.haxx.se/ca/cacert.pem" && \
-cd .. && \
-echo "**** make and install par2cmdline ****" && \
-git clone https://github.com/Parchive/par2cmdline.git && \
-cd par2cmdline && \
-./automake.sh && \
-./configure --disable-dependency-tracking && \
-make && \
-make check && \
-make install
+ cd .. && \
+ echo "**************************************" && \
+ echo "**** Make and Install par2cmdline ****" && \
+ echo "**************************************" && \
+ git clone https://github.com/Parchive/par2cmdline.git && \
+ cd par2cmdline && \
+ ./automake.sh && \
+ ./configure --disable-dependency-tracking && \
+ make && \
+ make check && \
+ make install
+ echo "**********************" && \
+ echo "**** Symlink par2 ****" && \
+ echo "**********************" && \
+ ln -s /usr/local/par2 /app/nzbget/par2 && \
 
-# Runtime Stage
+# Runtime stage
 FROM lsiobase/alpine:3.9
 
-# set version label
+# Set version label
 LABEL maintainer="Bushbrother"
 
-# add local files and files from buildstage
+# Add local files and files from buildstage
 COPY --from=buildstage /app/nzbget /app/nzbget
 COPY --from=buildstage /app/par2cmdline/par2 /usr/local/bin
 COPY --from=buildstage /app/par2cmdline/man/par2.1 /usr/local/share/man/man1
 COPY root/ /
 
+#Runtime
 RUN \
  echo "**** install packages ****" && \
  apk add --no-cache \
@@ -72,8 +91,11 @@ RUN \
 	unrar \
 	ffmpeg \
 	git \
-	wget
+	wget && \
+ ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
+ ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
+ ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair
 
-# ports and volumes
+# Ports and volumes
 VOLUME /config /downloads
 EXPOSE 6789
