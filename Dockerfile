@@ -78,9 +78,15 @@ COPY --from=buildstage /app/par2cmdline/par2 /usr/local/bin
 COPY --from=buildstage /app/par2cmdline/man/par2.1 /usr/local/share/man/man1
 COPY root/ /
 
-#Runtime
+#Main Runtime
 RUN \
- echo "**** install packages ****" && \
+ echo "***************************" && \
+ exho "**** BUSHBROTHER BUILD ****" && \
+ echo "***************************" && \
+ echo "" && \
+ echo "**************************" && \
+ echo "**** Install Packages ****" && \
+ echo "**************************" && \
  apk add --no-cache \
 	curl \
 	libxml2 \
