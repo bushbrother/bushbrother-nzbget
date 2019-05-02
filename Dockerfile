@@ -64,7 +64,7 @@ RUN \
  echo "**********************" && \
  echo "**** Symlink par2 ****" && \
  echo "**********************" && \
- ln -s /usr/local/bin/par2 /app/nzbget/par2 \
+ #ln -s /usr/local/bin/par2 /app/nzbget/par2
 
 # Runtime stage
 FROM lsiobase/alpine:3.9
