@@ -89,7 +89,7 @@ RUN \
 	libgomp \
 	openssl \
 	p7zip \
-	python3 \
+	python2.7 \
 	unrar \
 	ffmpeg \
 	git \
@@ -100,7 +100,7 @@ RUN \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2create && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2verify && \
  ln -sf /usr/local/bin/par2 /usr/local/bin/par2repair && \
- ln -sf /usr/bin/python3 /usr/bin/python
+ ln -sf /usr/bin/python2.7 /usr/bin/python
 
 # Ports and volumes
 VOLUME /config /downloads
