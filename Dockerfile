@@ -49,7 +49,7 @@ RUN \
  touch /app/nzbget/pubkey.pem && \
  curl -o \
 	/app/nzbget/cacert.pem -L \
-	"https://curl.haxx.se/ca/cacert.pem" && \
+	"https://nzbget.net/info/cacert.pem" && \
  cd .. && \
  echo "**************************************" && \
  echo "**** Make and Install par2cmdline ****" && \
