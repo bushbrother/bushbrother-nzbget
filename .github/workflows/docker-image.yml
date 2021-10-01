@@ -21,6 +21,6 @@ jobs:
       run: |
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag bushbrother-nzbget:$(date +%s)
+      run: docker build . --file Dockerfile --tag nzbget-bushbrother:$(date +%s)
     - name: Docker push
       run: docker push ${{SECRETS.DOCKER_USERNAME}}/nzbget-bushbrother
